@@ -1,0 +1,90 @@
+.theme.navbar {
+    background: #ef4238;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.fixed-top-mt {
+    margin-top: 56px;
+}
+.btn-white {
+    color: #ef4238;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+.btn-white:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: transparent;
+}
+.btn-outline-white {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: transparent;
+}
+.btn-outline-white:hover {
+    color: #ef4238;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+.user-avatar {
+    height: 36px;
+    width: 36px;
+    border: 1px solid #ffffff;
+}
+.user-username {
+    font-size: 1.25rem;
+    color: #ffffff;
+    border: 0;
+    background: #ef4238;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+}
+.hotLine header h3 {
+    color: #ef4238;
+    border-bottom: 3px solid #ef4238;
+}
+.comingSoon header h3 {
+    color: #2d98f3;
+    border-bottom: 3px solid #2d98f3;
+}
+.hotLine a.btn {
+    width: 100%;
+    background: #ef4238;
+}
+.comingSoon a.btn {
+    width: 100%;
+    background: #2d98f3;
+}
+.boxOfficeToday header h3 {
+    color: #ef4238;
+    border-bottom: 3px solid #ef4238;
+}
+.boxOfficeToday .list-group a span:nth-child(2) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 112px;
+}
+.boxOfficeToday .list-group a:nth-child(1),
+.boxOfficeToday .list-group a:nth-child(2),
+.boxOfficeToday .list-group a:nth-child(3) {
+    color: #ef4238;
+}
+.card {
+    transition: all 0.6s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card-goto {
+    color: #212529;
+    text-decoration: none;
+}
+.card-goto:hover {
+    color: #212529;
+    text-decoration: none;
+}
+.list-group-item {
+    text-align: center;
+}

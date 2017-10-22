@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "羞羞的铁拳",
+    "score": 9.1,
+    "playType": "2D",
+    "img": "http://p0.meituan.net/movie/62e854fcfdae277751c3bae23ea110aa131670.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "2",
+    "name": "天才枪手",
+    "score": 8.8,
+    "playType": "2D",
+    "img": "http://p0.meituan.net/movie/385a6d22c2f1ed563aa58594d56cee39955568.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "3",
+    "name": "缝纫机乐队",
+    "score": 9.3,
+    "playType": "2D",
+    "img": "http://p1.meituan.net/movie/cff7012c0cc944b27c9bba352a785e8e358408.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "4",
+    "name": "追龙",
+    "score": 9.0,
+    "playType": "2D",
+    "img": "http://p1.meituan.net/movie/82216ba6e2affdf84f134b4b03243c32273376.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "5",
+    "name": "英伦对决",
+    "score": 8.4,
+    "playType": "3D",
+    "img": "http://p1.meituan.net/movie/f7cbcd328a72b22c89a605c8c5197b40648862.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "6",
+    "name": "空天猎",
+    "score": 8.7,
+    "playType": "2D",
+    "img": "http://p1.meituan.net/movie/5d8ab833a6ffb29d945ebcd4965c72db702436.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "7",
+    "name": "十八洞村",
+    "score": 8.9,
+    "playType": "2D",
+    "img": "http://p0.meituan.net/movie/f1e6ed406c89be081dc1f748c6a246e0239301.jpg@464w_644h_1e_1c"
+  },
+  {
+    "id": "8",
+    "name": "回到火星",
+    "score": 8.4,
+    "playType": "2D",
+    "img": "http://p1.meituan.net/movie/9c13047ed58c44e053d1bf2e8a89afa9134318.jpg@464w_644h_1e_1c"
+  }
+]

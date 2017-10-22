@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div class="index">
+    <!-- 导航栏 -->
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark theme">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Movie</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbuarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="" aria-label="Search">
+                        <button class="btn btn-outline-white my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                    <div class="user-button ml-5 w-25 align-items-center justify-content-end d-flex"
+                         v-if="!state.login">
+                        <button class="btn btn-outline-white mr-2" data-toggle="modal" data-target="#modal-signup">注册
+                        </button>
+                        <button class="btn btn-white" data-toggle="modal" data-target="#modal-login">登录</button>
+                    </div>
+                    <div class="user-info ml-5 w-25 align-items-center justify-content-end d-flex" v-if="state.login">
+                        <img class="user-avatar mr-2" src="../img/user.svg" alt="">
+                        <div class="btn-group">
+                            <span class="user-username dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">{{ userInfo.username }}</span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">个人资料</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" @click="signOutSubmit">退出</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 轮播图 -->
+    <div class="carousel slide fixed-top-mt mb-5" data-ride="carousel" v-if="state.carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" :src="carousel.active.src" alt="First slide">
+            </div>
+            <div class="carousel-item" v-for="img in carousel.list">
+                <img class="d-block w-100" :src="img.src" alt="First slide">
+            </div>
+        </div>
+    </div>
+    <!-- 正文 -->
+    <div class="container">
+        <div class="row">
+            <main class="col-9 pl-0">
+                <!-- 正在热映 -->
+                <div class="hotLine mb-5" v-if="state.hotLine">
+                    <header>
+                        <h3 class="pl-3 pb-2">正在热映</h3>
+                    </header>
+                    <div class="row">
+                        <div class="col-3 mb-3" v-for="movie in hotLine">
+                            <div class="card pl-2 pt-2 pr-2">
+                                <a :href="'./detail.html?movieid='+movie.id" class="card-goto">
+                                    <img class="card-img-top" :src="movie.img" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ movie.name}}</h5>
+                                        <p class="card-text">评分: {{movie.score}}</p>
+                                    </div>
+                                </a>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="btn btn-danger" :href="'./ticket.html?movieid='+movie.id">订票</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 即将上映 -->
+                <div class="comingSoon mb-5" v-if="state.comingSoon">
+                    <header>
+                        <h3 class="pl-3 pb-3">即将上映</h3>
+                    </header>
+                    <div class="row">
+                        <div class="col-3 mb-4" v-for="movie in comingSoon">
+                            <div class="card pl-2 pt-2 pr-2">
+                                <a :href="'./detail.html?movieid='+movie.id" class="card-goto">
+                                    <img class="card-img-top" :src="movie.img" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ movie.name}}</h5>
+                                        <p class="card-text">评分: {{movie.score}}</p>
+                                    </div>
+                                </a>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a href="#" class="btn btn-primary">预售</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- -->
+            <aside class="col-3 pl-0">
+                <!-- 今日票房 -->
+                <div class="boxOfficeToday mb-5" v-if="state.boxOfficeToday">
+                    <header><h3 class="pl-3 pb-2">今日票房</h3></header>
+                    <div class="list-group">
+                        <a :href="'./detail.html?movieid='+movie.id" class="list-group-item list-group-item-action d-flex justify-content-between"
+                           v-for="movie in boxOfficeToday">
+                            <span>{{movie.ranking}}</span>
+                            <span>{{movie.name}}</span>
+                            <span>{{movie.boxOffice}} 万</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<div class="modal-group">
+    <!-- 注册模态框 -->
+    <div class="modal fade" id="modal-signup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">注册</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clear">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">手机号码</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control"
+                                       :class="(cellphone.state === 1) ? 'is-valid' : ((cellphone.state === 0) ? '' : 'is-invalid')"
+                                       v-model="cellphone.value" placeholder="请输入手机号码（中国大陆）" data-toggle="tooltip"
+                                       data-placement="right" :data-original-title="cellphone.msg">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">密码</label>
+                            <div class="col-8">
+                                <input type="password" class="form-control"
+                                       :class="(password.state === 1) ? 'is-valid' : ((password.state === 0) ? '' : 'is-invalid')"
+                                       v-model="password.value" placeholder="密码（8-20位字母与数字、符号组合）" data-toggle="tooltip"
+                                       data-placement="right" :data-original-title="password.msg">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">确认密码</label>
+                            <div class="col-8">
+                                <input type="password" class="form-control"
+                                       :class="(confirm.state === 1) ? 'is-valid' : ((confirm.state === 0) ? '' : 'is-invalid')"
+                                       v-model="confirm.value" placeholder="确认密码" data-toggle="tooltip"
+                                       data-placement="right" :data-original-title="confirm.msg">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clear">关闭</button>
+                    <button type="button" class="btn btn-primary" @click="signUpSubmit" :disabled="state">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 登录模态框 -->
+    <div class="modal fade" id="modal-login" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">登录</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clear">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">手机号码</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control"
+                                       :class="(cellphone.state === 1) ? 'is-valid' : ((cellphone.state === 0) ? '' : 'is-invalid')"
+                                       v-model="cellphone.value" placeholder="请输入手机号码" data-toggle="tooltip"
+                                       data-placement="right" :data-original-title="cellphone.msg">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">密码</label>
+                            <div class="col-8">
+                                <input type="password" class="form-control"
+                                       :class="(password.state === 1) ? 'is-valid' : ((password.state === 0) ? '' : 'is-invalid')"
+                                       v-model="password.value" placeholder="请输入密码" data-toggle="tooltip"
+                                       data-placement="right" :data-original-title="password.msg">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clear">关闭</button>
+                    <button type="button" class="btn btn-primary" @click="loginSubmit" :disabled="state">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.slim.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/user.js"></script>
+<script>
+    var indexVM = new Vue({
+        el: '.index',
+        data: {
+            state: {
+                login: false,
+                carousel: false,
+                hotLine: false,
+                comingSoon: false,
+                boxOfficeToday: false
+            },
+            carousel: {},
+            hotLine: [],
+            comingSoon: [],
+            boxOfficeToday: []
+        },
+        methods: {
+            signOutSubmit: function () {
+
+            }
+        },
+        beforeMount: function () {
+            var that = this;
+            //测试用JSON
+            var url = {
+                carousel: '../json/carousel.json',
+                hotLine: '../json/hotLine.json',
+                comingSoon: '../json/comingSoon.json',
+                boxOfficeToday: '../json/boxOfficeToday.json'
+            };
+            axios.get(url.carousel).then(function (r) {
+                that.carousel = r.data;
+                that.state.carousel = true;
+            });
+            axios.get(url.hotLine).then(function (r) {
+                that.hotLine = r.data;
+                that.state.hotLine = true;
+            });
+            axios.get(url.comingSoon).then(function (r) {
+                that.comingSoon = r.data;
+                that.state.comingSoon = true;
+            });
+            axios.get(url.boxOfficeToday).then(function (r) {
+                that.boxOfficeToday = r.data;
+                that.state.boxOfficeToday = true;
+            })
+        },
+        mounted: function () {
+
+        },
+        updated: function () {
+            $('.carousel').carousel();
+        }
+    });
+</script>
+</body>
+</html>

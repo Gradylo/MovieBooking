@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mb.movie.dao.MovieDao">
+	
+	<sql id="whereQuery">
+		<where>
+		<!-- if语句中的test是判断传入参数是否为空 -->
+			<if test="MovieName!=null and MovieName!=''">
+				moviename like concat("%",#{MovieName},"%")
+			</if>
+		</where>
+	</sql>
+	
+	<select id="findMovies" resultType="map">
+		SELECT * FROM movie
+		<include refid="whereQuery"/> 
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+	<insert id="addMovie">
+		insert into movie(MovieName,director,star,country,MovieLong,ReleaseTime,PlayType,MovieType,info,BoxOffice,popularity,CoverRoute) 
+		values(#{movie.MovieName},#{movie.director},#{movie.star},#{movie.country},#{movie.MovieLong},#{movie.ReleaseTime},
+		#{movie.PlayType},#{movie.MovieType},#{movie.info},#{movie.BoxOffice},#{movie.popularity},#{movie.CoverRoute})
+	</insert>
+	
+	<select id="getRowCount" resultType="int">
+		select count(*) 
+		from movie
+		<include refid="whereQuery"/> 
+	</select>
+	
+	<select id="GetTodayBoxOffice" resultType="cn.tedu.mb.movie.entity.Movie">
+		SELECT id,moviename,todayboxoffice
+			from movie
+			WHERE releasetime &lt; NOW()
+		ORDER BY todayboxoffice DESC
+		LIMIT 0,10
+	</select>
+	
+	<select id="hotLineMovie" resultType="cn.tedu.mb.movie.entity.Movie">
+		SELECT id,moviename,score,playtype,coverroute
+			from movie
+			WHERE releasetime &lt; NOW()
+		ORDER BY popularity ASC
+	</select>
+	
+</mapper>
+

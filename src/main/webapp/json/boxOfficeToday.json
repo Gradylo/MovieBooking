@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "羞羞的铁拳",
+    "boxOffice": 1046.44
+  },
+  {
+    "id": 2,
+    "name": "天才枪手",
+    "boxOffice": 639.79
+  },
+  {
+    "id": 3,
+    "name": "缝纫机乐队",
+    "boxOffice": 329.67
+  },
+  {
+    "id": 4,
+    "name": "追龙",
+    "boxOffice": 298.67
+  },
+  {
+    "id": 5,
+    "name": "英伦对决",
+    "boxOffice": 213.16
+  },
+  {
+    "id": 6,
+    "name": "空天猎",
+    "boxOffice": 160.96
+  },
+  {
+    "id": 7,
+    "name": "十八洞村",
+    "boxOffice": 149.59
+  },
+  {
+    "id": 8,
+    "name": "回到火星",
+    "boxOffice": 38.59
+  },
+  {
+    "id": 9,
+    "name": "情遇曼哈顿",
+    "boxOffice": 35.07
+  },
+  {
+    "id": 10,
+    "name": "我的爸爸是森林之王",
+    "boxOffice": 21.22
+  }
+]

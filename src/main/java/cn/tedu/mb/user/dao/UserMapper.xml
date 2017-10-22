@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.mb.user.dao.UserDao">
+	
+	<insert id="addUser">
+		insert into user(name,username,password,phone) values(#{user.name},#{user.username},#{user.password},#{user.phone})
+	</insert>
+	
+	<select id="findUser" parameterType="string" resultType="cn.tedu.mb.user.entity.User">
+		SELECT * FROM USER WHERE PHONE=#{PhoneOrUserName} OR USERNAME=#{PhoneOrUserName}
+	</select>
+	
+	<select id="checkLogin" resultType="cn.tedu.mb.user.entity.User">
+		SELECT * FROM USER WHERE PHONE=#{PhoneOrUserName} OR USERNAME=#{PhoneOrUserName} 
+		AND password=#{password}
+	</select>
+	
+</mapper>
+
